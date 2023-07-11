@@ -270,6 +270,31 @@ namespace Renci.SshNet
         /// </summary>
         /// <param name="input">Data input stream.</param>
         /// <param name="path">Remote file path.</param>
+        /// <param name="additionalCommands">The additional commands.</param>
+        /// <returns>
+        /// An <see cref="IAsyncResult" /> that references the asynchronous operation.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="input" /> is <b>null</b>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="path" /> is <b>null</b> or contains only whitespace characters.</exception>
+        /// <exception cref="SshConnectionException">Client is not connected.</exception>
+        /// <exception cref="SftpPermissionDeniedException">Permission to list the contents of the directory was denied by the remote host. <para>-or-</para> A SSH command was denied by the server.</exception>
+        /// <exception cref="SshException">A SSH error where <see cref="Exception.Message" /> is the message from the remote host.</exception>
+        /// <exception cref="ObjectDisposedException">The method was called after the client was disposed.</exception>
+        /// <remarks>
+        /// <para>
+        /// Method calls made by this method to <paramref name="input" />, may under certain conditions result in exceptions thrown by the stream.
+        /// </para>
+        /// <para>
+        /// If the remote file already exists, it is overwritten and truncated.
+        /// </para>
+        /// </remarks>
+        IAsyncResult BeginUploadFile(Stream input, string path, string additionalCommands);
+
+        /// <summary>
+        /// Begins an asynchronous uploading the stream into remote file.
+        /// </summary>
+        /// <param name="input">Data input stream.</param>
+        /// <param name="path">Remote file path.</param>
         /// <param name="asyncCallback">The method to be called when the asynchronous write operation is completed.</param>
         /// <returns>
         /// An <see cref="IAsyncResult" /> that references the asynchronous operation.
@@ -289,6 +314,32 @@ namespace Renci.SshNet
         /// </para>
         /// </remarks>
         IAsyncResult BeginUploadFile(Stream input, string path, AsyncCallback asyncCallback);
+
+        /// <summary>
+        /// Begins an asynchronous uploading the stream into remote file.
+        /// </summary>
+        /// <param name="input">Data input stream.</param>
+        /// <param name="path">Remote file path.</param>
+        /// <param name="additionalCommands">The additional commands.</param>
+        /// <param name="asyncCallback">The method to be called when the asynchronous write operation is completed.</param>
+        /// <returns>
+        /// An <see cref="IAsyncResult" /> that references the asynchronous operation.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="input" /> is <b>null</b>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="path" /> is <b>null</b> or contains only whitespace characters.</exception>
+        /// <exception cref="SshConnectionException">Client is not connected.</exception>
+        /// <exception cref="SftpPermissionDeniedException">Permission to list the contents of the directory was denied by the remote host. <para>-or-</para> A SSH command was denied by the server.</exception>
+        /// <exception cref="SshException">A SSH error where <see cref="Exception.Message" /> is the message from the remote host.</exception>
+        /// <exception cref="ObjectDisposedException">The method was called after the client was disposed.</exception>
+        /// <remarks>
+        /// <para>
+        /// Method calls made by this method to <paramref name="input" />, may under certain conditions result in exceptions thrown by the stream.
+        /// </para>
+        /// <para>
+        /// If the remote file already exists, it is overwritten and truncated.
+        /// </para>
+        /// </remarks>
+        IAsyncResult BeginUploadFile(Stream input, string path, string additionalCommands, AsyncCallback asyncCallback);
 
         /// <summary>
         /// Begins an asynchronous uploading the stream into remote file.
@@ -322,6 +373,34 @@ namespace Renci.SshNet
         /// </summary>
         /// <param name="input">Data input stream.</param>
         /// <param name="path">Remote file path.</param>
+        /// <param name="additionalCommands">The additional commands.</param>
+        /// <param name="asyncCallback">The method to be called when the asynchronous write operation is completed.</param>
+        /// <param name="state">A user-provided object that distinguishes this particular asynchronous write request from other requests.</param>
+        /// <param name="uploadCallback">The upload callback.</param>
+        /// <returns>
+        /// An <see cref="IAsyncResult" /> that references the asynchronous operation.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="input" /> is <b>null</b>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="path" /> is <b>null</b> or contains only whitespace characters.</exception>
+        /// <exception cref="SshConnectionException">Client is not connected.</exception>
+        /// <exception cref="SftpPermissionDeniedException">Permission to list the contents of the directory was denied by the remote host. <para>-or-</para> A SSH command was denied by the server.</exception>
+        /// <exception cref="SshException">A SSH error where <see cref="Exception.Message" /> is the message from the remote host.</exception>
+        /// <exception cref="ObjectDisposedException">The method was called after the client was disposed.</exception>
+        /// <remarks>
+        /// <para>
+        /// Method calls made by this method to <paramref name="input" />, may under certain conditions result in exceptions thrown by the stream.
+        /// </para>
+        /// <para>
+        /// If the remote file already exists, it is overwritten and truncated.
+        /// </para>
+        /// </remarks>
+        IAsyncResult BeginUploadFile(Stream input, string path, string additionalCommands, AsyncCallback asyncCallback, object state, Action<ulong> uploadCallback = null);
+
+        /// <summary>
+        /// Begins an asynchronous uploading the stream into remote file.
+        /// </summary>
+        /// <param name="input">Data input stream.</param>
+        /// <param name="path">Remote file path.</param>
         /// <param name="canOverride">Specified whether an existing file can be overwritten.</param>
         /// <param name="asyncCallback">The method to be called when the asynchronous write operation is completed.</param>
         /// <param name="state">A user-provided object that distinguishes this particular asynchronous write request from other requests.</param>
@@ -343,6 +422,34 @@ namespace Renci.SshNet
         /// </para>
         /// </remarks>
         IAsyncResult BeginUploadFile(Stream input, string path, bool canOverride, AsyncCallback asyncCallback, object state, Action<ulong> uploadCallback = null);
+
+        /// <summary>
+        /// Begins an asynchronous uploading the stream into remote file.
+        /// </summary>
+        /// <param name="input">Data input stream.</param>
+        /// <param name="path">Remote file path.</param>
+        /// <param name="additionalCommands">The additional commands.</param>
+        /// <param name="canOverride">Specified whether an existing file can be overwritten.</param>
+        /// <param name="asyncCallback">The method to be called when the asynchronous write operation is completed.</param>
+        /// <param name="state">A user-provided object that distinguishes this particular asynchronous write request from other requests.</param>
+        /// <param name="uploadCallback">The upload callback.</param>
+        /// <returns>
+        /// An <see cref="IAsyncResult" /> that references the asynchronous operation.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="input" /> is <b>null</b>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="path" /> is <b>null</b> or contains only whitespace characters.</exception>
+        /// <exception cref="ObjectDisposedException">The method was called after the client was disposed.</exception>
+        /// <remarks>
+        /// <para>
+        /// Method calls made by this method to <paramref name="input" />, may under certain conditions result in exceptions thrown by the stream.
+        /// </para>
+        /// <para>
+        /// When <paramref name="path"/> refers to an existing file, set <paramref name="canOverride"/> to <c>true</c> to overwrite and truncate that file.
+        /// If <paramref name="canOverride"/> is <c>false</c>, the upload will fail and <see cref="EndUploadFile(IAsyncResult)"/> will throw an
+        /// <see cref="SshException"/>.
+        /// </para>
+        /// </remarks>
+        IAsyncResult BeginUploadFile(Stream input, string path, string additionalCommands, bool canOverride, AsyncCallback asyncCallback, object state, Action<ulong> uploadCallback = null);
 
         /// <summary>
         /// Changes remote directory to path.
@@ -981,6 +1088,24 @@ namespace Renci.SshNet
         /// </summary>
         /// <param name="input">Data input stream.</param>
         /// <param name="path">Remote file path.</param>
+        /// <param name="additionalCommands">The additional commands.</param>
+        /// <param name="uploadCallback">The upload callback.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="input" /> is <b>null</b>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="path" /> is <b>null</b> or contains only whitespace characters.</exception>
+        /// <exception cref="SshConnectionException">Client is not connected.</exception>
+        /// <exception cref="SftpPermissionDeniedException">Permission to upload the file was denied by the remote host. <para>-or-</para> A SSH command was denied by the server.</exception>
+        /// <exception cref="SshException">A SSH error where <see cref="Exception.Message" /> is the message from the remote host.</exception>
+        /// <exception cref="ObjectDisposedException">The method was called after the client was disposed.</exception>
+        /// <remarks>
+        /// Method calls made by this method to <paramref name="input" />, may under certain conditions result in exceptions thrown by the stream.
+        /// </remarks>
+        void UploadFile(Stream input, string path, string additionalCommands, Action<ulong> uploadCallback = null);
+
+        /// <summary>
+        /// Uploads stream into remote file.
+        /// </summary>
+        /// <param name="input">Data input stream.</param>
+        /// <param name="path">Remote file path.</param>
         /// <param name="canOverride">if set to <c>true</c> then existing file will be overwritten.</param>
         /// <param name="uploadCallback">The upload callback.</param>
         /// <exception cref="ArgumentNullException"><paramref name="input" /> is <b>null</b>.</exception>
@@ -993,6 +1118,25 @@ namespace Renci.SshNet
         /// Method calls made by this method to <paramref name="input" />, may under certain conditions result in exceptions thrown by the stream.
         /// </remarks>
         void UploadFile(Stream input, string path, bool canOverride, Action<ulong> uploadCallback = null);
+
+        /// <summary>
+        /// Uploads stream into remote file.
+        /// </summary>
+        /// <param name="input">Data input stream.</param>
+        /// <param name="path">Remote file path.</param>
+        /// <param name="additionalCommands">The additional commands.</param>
+        /// <param name="canOverride">if set to <c>true</c> then existing file will be overwritten.</param>
+        /// <param name="uploadCallback">The upload callback.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="input" /> is <b>null</b>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="path" /> is <b>null</b> or contains only whitespace characters.</exception>
+        /// <exception cref="SshConnectionException">Client is not connected.</exception>
+        /// <exception cref="SftpPermissionDeniedException">Permission to upload the file was denied by the remote host. <para>-or-</para> A SSH command was denied by the server.</exception>
+        /// <exception cref="SshException">A SSH error where <see cref="Exception.Message" /> is the message from the remote host.</exception>
+        /// <exception cref="ObjectDisposedException">The method was called after the client was disposed.</exception>
+        /// <remarks>
+        /// Method calls made by this method to <paramref name="input" />, may under certain conditions result in exceptions thrown by the stream.
+        /// </remarks>
+        void UploadFile(Stream input, string path, string additionalCommands, bool canOverride, Action<ulong> uploadCallback = null);
 
         /// <summary>
         /// Writes the specified byte array to the specified file, and closes the file.
